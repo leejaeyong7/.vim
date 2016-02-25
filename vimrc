@@ -16,6 +16,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'bling/vim-airline'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+Plugin 'scrooloose/nerdcommenter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 "===============================================================================

@@ -8,6 +8,20 @@ snippet hc "header comment" b
  *============================================================================*/
 endsnippet
 
+snippet fcd "function comment detailed"
+/**
+ * $1
+ * @param
+ * @return
+ */
+endsnippet
+
+snippet fc "function comment"
+/**
+ * $1
+ */
+endsnippet
+
 snippet "dc(.)(1[8-9]|[2-7][0-9]|80)$" "divider comment" br 
 //`!p snip.rv = (int(match.group(2)) - 4)*match.group(1)`//
 //`!p snip.rv = int(((int(match.group(2)) - 4)-len(t[1]))/2)*match.group(1)`${1:DIVIDER}`!p snip.rv=int(((int(match.group(2)) - 4)-len(t[1])+1)/2)*match.group(1)`//
