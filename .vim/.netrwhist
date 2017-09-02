@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/jae/Dev/Projects/reconstruct'
+let g:netrw_dirhist_2='/home/jae/Dev/Projects'
+let g:netrw_dirhist_3='/home/jae/Dev'
+let g:netrw_dirhist_4='/home/jae'
+let g:netrw_dirhist_5='/etc/nginx/conf.d'
+let g:netrw_dirhist_6='/home/jae/Dev/Projects/projmanager/src/client/uploader'
+let g:netrw_dirhist_7='/home/jae/Dev/Projects/projmanager/.ebextensions'
+let g:netrw_dirhist_8='/home/jae'
+let g:netrw_dirhist_9='/home/jae/Dev/Projects/reconstruct/bin'
