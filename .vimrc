@@ -1,6 +1,22 @@
+" System settings
 if has('win32') || has('win64')
   noremap <C-V> <C-V>
 endif
+
+" core vim settings
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+filetype plugin indent on
+
+set vb t_vb=
+set incsearch                   " incremental search
+set hlsearch                    " highlighted search results
+set showmatch                   " show matching brackets/parenthesis
+set matchtime=0                 " don't blink when matching
+set encoding=utf-8
+set backspace=indent,eol,start
 
 " Setup Plugin
 call plug#begin('~/.vim/plugged')
@@ -15,7 +31,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript'
-Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'chriskempson/base16-vim'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " Fold setting
@@ -38,17 +56,11 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guifont=hack:h12
 if has('gui_running')
-	colorscheme monokai
+	colorscheme base16-monokai
 else
 	set background=dark
 endif
 
-" Indent related settings
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-filetype plugin indent on
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=NONE ctermbg=NONE
@@ -145,3 +157,17 @@ function! SetProjectRoot()
 endfunction
 " follow symlink and set working directory
 autocmd BufRead * call SetProjectRoot()
+
+" YCM setups
+let g:ycm_add_preview_to_completeopt = 1
+
+" Syntastic related settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers=['eslint']
