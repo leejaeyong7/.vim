@@ -36,6 +36,7 @@ Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " Fold setting
@@ -141,6 +142,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 
 " Nerd Tree related settings
 nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeFind<cr>
 
 " Misc. Key maps
 nnoremap <C-w>q :hide<CR>
