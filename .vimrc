@@ -10,7 +10,8 @@ set softtabstop=2
 set expandtab
 filetype plugin indent on
 
-set vb t_vb=
+set noeb vb t_vb=
+au GUIEnter * set vb t_vb=
 set incsearch                   " incremental search
 set hlsearch                    " highlighted search results
 set showmatch                   " show matching brackets/parenthesis
@@ -20,8 +21,6 @@ set backspace=indent,eol,start
 
 " Setup Plugin
 call plug#begin('~/.vim/plugged')
-Plug 'sickill/vim-monokai'
-Plug 'mileszs/ack.vim'
 Plug 'mileszs/ack.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -31,9 +30,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript'
-Plug 'Valloric/YouCompleteMe'
 Plug 'chriskempson/base16-vim'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " Fold setting
@@ -54,7 +56,7 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set guifont=hack:h12
+set guifont=hack:h10
 if has('gui_running')
 	colorscheme base16-monokai
 else
@@ -90,7 +92,7 @@ set smartcase
 let mapleader = " "
 
 " -- Leader Git related settings
-nnoremap <leader>s :Gstatus<CR>
+nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Git checkout<Space>
 nnoremap <leader>gc :Gcommit<CR>
 
@@ -99,7 +101,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>n :enew<CR>
 nnoremap <leader>h :bp<CR>
 nnoremap <leader>l :bn<CR>
-nnoremap <leader>bq :bp <BAR> bd #<CR>
+nnoremap <leader>d :bp <BAR> bd #<CR>
 
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
@@ -119,10 +121,12 @@ set laststatus=2
 " Ack.vim settings
 nnoremap <Leader>/ :Ack<Space>
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
 " CtrlP related settinsg
+nnoremap <leader>v "+p
+vnoremap <leader>c "+y
 nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader>. :CtrlPCurFile<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -159,15 +163,14 @@ endfunction
 autocmd BufRead * call SetProjectRoot()
 
 " YCM setups
-let g:ycm_add_preview_to_completeopt = 1
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_add_preview_to_completeopt = 0
+set completeopt-=preview
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" Syntastic related settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers=['eslint']
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
