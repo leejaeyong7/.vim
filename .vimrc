@@ -3,12 +3,15 @@ if has('win32') || has('win64')
   noremap <C-V> <C-V>
 endif
 
+let $PATH = '/usr/local/bin:'.$PATH
 " core vim settings
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 filetype plugin indent on
+
+autocmd Filetype python setlocal ts=2 sw=2 expandtab
 
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
@@ -26,6 +29,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
@@ -37,7 +41,13 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'tpope/vim-dispatch'
 call plug#end()
+
+" AIrline setup
+set list          " Display unprintable characters f12 - switches
+set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 
 " Fold setting
 " Note, perl automatically sets foldmethod in the syntax file
@@ -48,6 +58,7 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml,perl,javascript normal zR
 au BufNewFile,BufRead *.ejs set filetype=html
 
 " Color Scheme files
+set nocompatible
 syntax enable
 "colorscheme Tomorrow-Night
 set paste
@@ -57,18 +68,18 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set guifont=hack:h10
+set guifont=hack:h12
+
 if has('gui_running')
-	colorscheme base16-monokai
+  colorscheme base16-solarized-light
 else
-	set background=dark
+  set background=light
 endif
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=NONE ctermbg=NONE
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey25 ctermbg=black
-        
 " Keyword related settings
 set iskeyword-=_
 
@@ -76,7 +87,7 @@ set iskeyword-=_
 " -- JS
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
-set cino=(0
+set cino+=(0
 
 " Command bar related settings
 set wildmenu
@@ -146,7 +157,6 @@ nnoremap <leader>e :NERDTreeFind<cr>
 
 " Misc. Key maps
 nnoremap <C-w>q :hide<CR>
-  
 
 " set working directory to git project root
 " or directory of current file if not git project
@@ -170,7 +180,7 @@ let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
