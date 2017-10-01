@@ -1,6 +1,7 @@
 " System settings
 if has('win32') || has('win64')
   noremap <C-V> <C-V>
+  set paste
 endif
 
 let $PATH = '/usr/local/bin:'.$PATH
@@ -61,7 +62,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
 set nocompatible
 syntax enable
 "colorscheme Tomorrow-Night
-set paste
 
 " GUI related settings
 set guioptions-=m  "remove menu bar
@@ -180,7 +180,7 @@ let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
