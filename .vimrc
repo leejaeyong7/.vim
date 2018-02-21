@@ -69,6 +69,10 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guifont=hack:h12
+set colorcolumn=+1        " highlight column after 'textwidth'
+set colorcolumn=+1,+2,+3  " highlight three columns after 'textwidth'
+set colorcolumn=80        " highlight column at 80
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 if has('gui_running')
   colorscheme base16-solarized-light
@@ -87,7 +91,7 @@ set iskeyword-=_
 " -- JS
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
-set cino+=(0
+set cino+=(0,W2,l1
 
 " Command bar related settings
 set wildmenu
