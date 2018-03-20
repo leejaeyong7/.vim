@@ -22,6 +22,7 @@ set showmatch                   " show matching brackets/parenthesis
 set matchtime=0                 " don't blink when matching
 set encoding=utf-8
 set backspace=indent,eol,start
+set undofile
 
 " Setup Plugin
 call plug#begin('~/.vim/plugged')
@@ -42,8 +43,8 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'tpope/vim-dispatch'
+Plug 'mbbill/undotree'
 call plug#end()
 
 " AIrline setup
@@ -154,6 +155,9 @@ let g:ctrlp_prompt_mappings = {
     \ 'PrtHistory(1)':        ['<up>'],
     \ }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
+" undo Tree related settings
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " Nerd Tree related settings
 nnoremap <leader>t :NERDTreeToggle<CR>
