@@ -26,8 +26,8 @@ set undofile
 
 " Setup Plugin
 call plug#begin('~/.vim/plugged')
-Plug 'mileszs/ack.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
@@ -45,6 +45,7 @@ Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-dispatch'
 Plug 'mbbill/undotree'
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 " AIrline setup
@@ -135,26 +136,21 @@ nnoremap <Leader>0 :10b<CR>
 set laststatus=2
 
 
-" Ack.vim settings
-nnoremap <Leader>/ :Ack<Space>
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
-endif
-
-" CtrlP related settinsg
 nnoremap <leader>v "+p
 vnoremap <leader>c "+y
-nnoremap <leader>f :CtrlP<CR>
-nnoremap <leader>. :CtrlPCurFile<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>r :CtrlPMRUFiles<CR>
-let g:ctrlp_prompt_mappings = {
-    \ 'PrtSelectMove("j")':   ['<c-j>', '<c-n>'],
-    \ 'PrtSelectMove("k")':   ['<c-k>', '<c-p>'],
-    \ 'PrtHistory(-1)':       ['<down>'],
-    \ 'PrtHistory(1)':        ['<up>'],
-    \ }
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
+" fzf & silver searcher setup
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>. :FZF <C-R>=expand('%:h')<CR><CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>r :History<CR>
+
+nnoremap <Leader>p :Tags<CR>
+nnoremap <Leader>s :BTags<CR>
+
+nnoremap <Leader>D :Tags <C-r>=expand('<cword>')<CR><CR>
+nnoremap <Leader>d :BTags <C-r>=expand('<cword>')<CR><CR>
+nnoremap <Leader>/ :Ag<CR>
 
 " undo Tree related settings
 nnoremap <leader>u :UndotreeToggle<CR>
@@ -179,6 +175,7 @@ function! SetProjectRoot()
     lcd `=git_dir`
   endif
 endfunction
+
 " follow symlink and set working directory
 autocmd BufRead * call SetProjectRoot()
 
@@ -194,3 +191,5 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
